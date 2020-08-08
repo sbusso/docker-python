@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN rm requirements.txt
 
 ENV APP_HOME=/app
-ARG WORKERS=1 
+ENV WORKERS=1 
 WORKDIR $APP_HOME
 
-CMD exec gunicorn --bind :$PORT --workers :$WORKERS --threads 8 --timeout 0 app:app
+CMD exec gunicorn --bind :$PORT --workers $WORKERS --threads 8 --timeout 0 app:app
