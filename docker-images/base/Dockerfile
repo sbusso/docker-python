@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN rm requirements.txt
 
+ENV PYTHONUNBUFFERED True
 ENV APP_HOME=/app
 ENV WORKERS=1 
 WORKDIR $APP_HOME
