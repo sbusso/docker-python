@@ -2,6 +2,9 @@ FROM python:3.8-slim
 
 LABEL maintainer="Stephane Busso <stephane.busso@gmail.com>"
 
+RUN apt-get update && apt install -y --no-install-recommends git && \
+  apt autoremove && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+
 COPY requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
