@@ -2,14 +2,12 @@ FROM python:3.8-slim
 
 LABEL maintainer="Stephane Busso <stephane.busso@gmail.com>"
 
-RUN apt-get update && apt install -y --no-install-recommends git && \
-  apt autoremove && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
-
 COPY requirements.txt ./requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-RUN rm requirements.txt
+RUN apt-get update && apt install -y --no-install-recommends git && \
+  pip install --no-cache-dir -r requirements.txt && \
+  apt purge -y git && apt autoremove -y && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+  rm requirements.txt 
 
 ENV PYTHONUNBUFFERED True
 ENV APP_HOME=/app
